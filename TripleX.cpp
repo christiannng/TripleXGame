@@ -1,4 +1,5 @@
 #include <iostream>
+#include <ctime>
 
 void PrintIntroduction(int Difficulty)
 {
@@ -12,9 +13,9 @@ bool PlayGame(int Difficulty)
     PrintIntroduction(Difficulty);
     
     //Declare 3 number code
-    const int CodeA = 4;
-    const int CodeB = 3;
-    const int CodeC = 2;
+    const int CodeA = rand() % Difficulty + Difficulty;
+    const int CodeB = rand() % Difficulty + Difficulty;
+    const int CodeC = rand() % Difficulty + Difficulty;
 
     const int CodeSum = CodeA + CodeB + CodeC;
     const int CodeProduct = CodeA * CodeB * CodeC;
@@ -34,18 +35,20 @@ bool PlayGame(int Difficulty)
 
     if(GuessSum == CodeSum)
     {
-        std::cout << "You win!";
+        std::cout << "\n***  Well done agent! You have extracted a file! Keep going! ***";
         return true;
     } 
     else
     {
-        std::cout << "You lose!";
+        std::cout << "\n*** You entered the wrong code! Careful agent! Try again! ***";
         return false;
     }
 }
 
 int main()
 {
+    srand(time(NULL)); //Create new random sequence based on time of day
+
     int LevelDifficulty = 1;
     int MaxDifficulty = 10;
 
@@ -61,5 +64,6 @@ int main()
         }
     }
     
+    std::cout << "\n*** Great work agent! You got all the files! Now get out of there! ***\n";
     return 0;
 }
